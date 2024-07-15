@@ -1,0 +1,79 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+import java.util.Scanner;
+
+    public class Calculate{
+        public static void main(String[]args){
+              
+        Scanner Sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of subjects:");
+        int Subjects = Sc.nextInt();
+
+        if (Subjects < 1) {
+            System.out.println("Invalid input. Number of subjects must be 1 or more.");
+            return;
+        }
+
+        int[] stud_marks = new int[Subjects];
+
+        System.out.println("Enter the marks obtained in each subject (out of 100):");
+        for (int i = 0; i < Subjects; i++) {
+            while (true) {
+                System.out.print("Subject " + (i + 1) + ": ");
+                stud_marks[i] = Sc.nextInt();
+
+                if ((stud_marks[i] < 0) || (stud_marks[i] > 100)) {
+                    System.out.println("invalid input. Marks must be between 0 to 100.");
+                } 
+                else {
+                    break;
+                }
+            }
+        }
+
+
+
+        int totalMarks = calculateTotalMarks(stud_marks);
+
+        double average_percentage = calculateaverage_percentage( totalMarks, Subjects);
+
+        String grade = Grade(average_percentage);
+
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Average Percentage: " + String.format("%.2f", average_percentage) + "%");
+        System.out.println("Grade: "+ grade );
+    }
+
+     private static int calculateTotalMarks(int[] stud_marks) {
+        int totalMarks = 0;
+        for (int mark : stud_marks) {
+            totalMarks += mark;
+        }
+        return totalMarks;
+    }
+
+    private static double calculateaverage_percentage(int totalMarks, int Subjects) {
+        return (double) totalMarks / Subjects;
+    }
+
+    private static String Grade(double average_percentage) {
+        if (average_percentage >= 90) {
+            return "A";
+        } 
+        else if (average_percentage >= 80) {
+            return "B";
+        } 
+        else if (average_percentage >= 70) {
+            return "C";
+        } 
+        else if (average_percentage >= 60) {
+            return "D";
+        } 
+        else {
+            return "F";
+        }
+    }
+}
+
+        
